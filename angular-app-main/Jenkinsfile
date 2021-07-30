@@ -17,7 +17,7 @@ pipeline {
         sh "ansible --version"
         echo "Workspace Folder: ${WORKSPACE}"
       }
-    }
+    } 
     stage('Install packages') {
       steps {
         dir("${WORKSPACE}/conduit-ui") {
