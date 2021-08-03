@@ -3,7 +3,7 @@ pipeline {
   environment {
     COURSE = 'Calgary DevOps'
     BRANCH = 'main'
-    WWWROOT = '/var/www'
+    WWWROOT = '/var/www/html'
     SSHUSER = 'jenkins'
   }
   stages {
@@ -42,10 +42,10 @@ pipeline {
     }
     stage('Deploy app to WEB01') {
       steps {
-        sh "ssh web01 rm -rf /home/${SSHUSER}/conduit"
-        sh "scp -r ${WORKSPACE}/conduit-ui/dist web01:/home/${SSHUSER}/conduit"
-        sh "ssh web01 sudo rm -rf ${WWWROOT}/conduit"
-        sh "ssh web01 sudo cp -r /home/${SSHUSER}/conduit ${WWWROOT}/conduit"
+        sh "ssh ubuntu@web01 rm -rf /home/${SSHUSER}/html/conduit"
+        sh "scp -r ${WORKSPACE}/conduit-ui/dist web01:/home/${SSHUSER}/html/conduit"
+        sh "ssh ubuntu@web01 sudo rm -rf ${WWWROOT}/html/conduit"
+        sh "ssh ubuntu@web01 sudo cp -r /home/${SSHUSER}/conduit ${WWWROOT}/html/conduit"
       }
     }
   }
